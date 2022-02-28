@@ -25,11 +25,15 @@ void setup()
   pinMode(BUZZER_PIN, OUTPUT);
 }
 
-void buzzy(int beepLength){
+void buzzy(int beepLength, int pitch){
+int starttime = millis();
+int endtime = starttime;
 
- for (int i = 0; i <= beepLength; i++){
-  digitalWrite(BUZZER_PIN, HIGH); delay(1);
-  digitalWrite(BUZZER_PIN, LOW); delay(1);
+//int endtime = starttime+beepLength;
+while ((endtime - starttime) <=beepLength){
+  digitalWrite(BUZZER_PIN, HIGH); delay(pitch);
+  digitalWrite(BUZZER_PIN, LOW); delay(pitch);
+  endtime = millis();
  }
      
 }
@@ -37,18 +41,18 @@ void buzzy(int beepLength){
 
 void printKey( char key) {
   switch(key) {
-   case '0': Serial.println("column 2, row 4"); buzzy(20);  break;
-   case '1': Serial.println("column 1, row 6"); buzzy20();  break;
-   case '2': Serial.println("column 2, row 1"); buzzy(20);  break;
-   case '3': Serial.println("column 1, row 1"); buzzy(20);  break;
-   case '4': Serial.println("column 2, row 6"); buzzy(20);  break;
-   case '5': Serial.println("column 2, row 2"); buzzy(20);  break;
-   case '6': Serial.println("column 1, row 2"); buzzy(20);  break;
-   case '7': Serial.println("column 1, row 5"); buzzy(20);  break;
-   case '8': Serial.println("column 2, row 3"); buzzy(20);  break;
-   case '9': Serial.println("column 1, row 3"); buzzy(20);  break;    
-   case '*': Serial.println("column 1, row 4"); buzzy(20);  break;
-   case '#': Serial.println("column 2, row 5"); buzzy(20);  break;    
+   case '0': Serial.println("column 2, row 4"); buzzy(150, 8);  break;
+   case '1': Serial.println("column 1, row 6"); buzzy(150, 11);  break;
+   case '2': Serial.println("column 2, row 1"); buzzy(150, 2);  break;
+   case '3': Serial.println("column 1, row 1"); buzzy(150, 1);  break;
+   case '4': Serial.println("column 2, row 6"); buzzy(150, 12);  break;
+   case '5': Serial.println("column 2, row 2"); buzzy(150, 4);  break;
+   case '6': Serial.println("column 1, row 2"); buzzy(150, 3);  break;
+   case '7': Serial.println("column 1, row 5"); buzzy(150, 9);  break;
+   case '8': Serial.println("column 2, row 3"); buzzy(150, 6);  break;
+   case '9': Serial.println("column 1, row 3"); buzzy(150, 5);  break;    
+   case '*': Serial.println("column 1, row 4"); buzzy(150, 7);  break;
+   case '#': Serial.println("column 2, row 5"); buzzy(150, 10);  break;    
   }
   
 }
