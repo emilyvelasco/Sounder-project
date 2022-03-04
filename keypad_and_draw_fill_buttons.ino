@@ -85,10 +85,12 @@ Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 void setup()
 {
   videoOut.begin();
+  //flip screen around to orient correctly on CRT
+  videoOut.setRotation(3);
   //Serial.begin(9600);
   pinMode(BUZZER_PIN, OUTPUT);
 }
-
+//create a beep of tone and duration set by the user
 void buzzy(int beepLength, int pitch){
 int starttime = millis();
 int endtime = starttime;
@@ -101,29 +103,44 @@ while ((endtime - starttime) <=beepLength){
  }
      
 }
-
-void fillButton(int buttonX int buttonY int buttonW int buttonH int buttonColor int buttonTime){
+//blacken the graphical element representing the pressed button by a duration set by the user
+void fillButton(int buttonX, int buttonY, int buttonW, int buttonH, int buttonColor, int buttonTime){
+  int starttime = millis();
+  int endtime = starttime;
+  while ((endtime - starttime) <=buttonTime){
+  videoOut.setRotation(3);
+  videoOut.waitForFrame();
   videoOut.fillRect(buttonX, buttonY, buttonW, buttonH, buttonColor);
-  delay(buttonTime);
-  videoOut.fillScreen(0);
+  endtime = millis();
+  //videoOut.fillScreen(0);
+  }
 }
 
 
-
+//keypad is wired as a 4x3 but arranged as a 6x2. this arranges them to fix 6x2
 void printKey( char key) {
   switch(key) {
-   case '0': Serial.println("column 2, row 4"); buzzy(50, 1); videoOut.fillRect(132, 122, 48, 28, 0xFF); break;
-   case '1': Serial.println("column 1, row 6"); buzzy(50, 1); videoOut.fillRect(78, 186, 48, 28, 0xFF); break;
-   case '2': Serial.println("column 2, row 1"); buzzy(50, 1); videoOut.fillRect(132, 26, 48, 28, 0xFF); break;
-   case '3': Serial.println("column 1, row 1"); buzzy(50, 1); videoOut.fillRect(78, 26, 48, 28, 0xFF); break;
-   case '4': Serial.println("column 2, row 6"); buzzy(50, 1); videoOut.fillRect(132, 186, 48, 28, 0xFF); break;
-   case '5': Serial.println("column 2, row 2"); buzzy(50, 1); videoOut.fillRect(132, 58, 48, 28, 0xFF); break;
-   case '6': Serial.println("column 1, row 2"); buzzy(50, 1); videoOut.fillRect(78, 58, 48, 28, 0xFF); break;
-   case '7': Serial.println("column 1, row 5"); buzzy(50, 1); videoOut.fillRect(78, 154, 48, 28, 0xFF); break;
-   case '8': Serial.println("column 2, row 3"); buzzy(50, 1); videoOut.fillRect(132, 90, 48, 28, 0xFF); break;
-   case '9': Serial.println("column 1, row 3"); buzzy(50, 1); videoOut.fillRect(78, 90, 48, 28, 0xFF); break;    
-   case '*': Serial.println("column 1, row 4"); buzzy(50, 1); videoOut.fillRect(78, 122, 48, 28, 0xFF); break;
-   case '#': Serial.println("column 2, row 5"); buzzy(50, 1); videoOut.fillRect(132, 186, 48, 28, 0xFF); break;    
+   case '3': Serial.println("column 1, row 1"); buzzy(50, 1); fillButton(120, 20, 48, 28,  0x00, 100); break;
+   case '6': Serial.println("column 1, row 2"); buzzy(50, 1); fillButton(120, 52, 48, 28,  0x00, 100); break;
+   case '9': Serial.println("column 1, row 3"); buzzy(50, 1); fillButton(120, 84, 48, 28,  0x00, 100); break;
+   case '*': Serial.println("column 1, row 4"); buzzy(50, 1); fillButton(120, 116, 48, 28,  0x00, 100); break;
+   case '7': Serial.println("column 1, row 5"); buzzy(50, 1); fillButton(120, 148, 48, 28,  0x00, 100); break;
+   case '1': Serial.println("column 1, row 6"); buzzy(50, 1); fillButton(120, 180, 48, 28,  0x00, 100); break;
+   
+  
+   
+   case '2': Serial.println("column 2, row 1"); buzzy(50, 1); fillButton(172, 20, 48, 28,  0x00, 50); break;
+   case '5': Serial.println("column 2, row 2"); buzzy(50, 1); fillButton(172, 52, 48, 28,  0x00, 50); break;
+   case '8': Serial.println("column 2, row 3"); buzzy(50, 1); fillButton(172, 84, 48, 28,  0x00, 50); break;
+   case '0': Serial.println("column 2, row 4"); buzzy(50, 1); fillButton(172, 116, 48, 28,  0x0, 50); break;
+   case '#': Serial.println("column 2, row 5"); buzzy(50, 1); fillButton(172, 148, 48, 28,  0x00, 50); break;
+   case '4': Serial.println("column 2, row 6"); buzzy(50, 1); fillButton(172, 180, 48, 28,  0x00, 50); break;
+   
+   
+   
+   
+       
+    
   }
   
 }
@@ -131,27 +148,29 @@ void printKey( char key) {
  
 void loop()
 {
+    videoOut.setRotation(3);
     videoOut.waitForFrame();
 
   // Clear screen
   videoOut.fillScreen(0);
-
+  // draw buttons on the screen
   // Left column
-  videoOut.drawRect(78, 26, 48, 28, 0xFF);
-  videoOut.drawRect(78, 58, 48, 28, 0xFF);
-  videoOut.drawRect(78, 90, 48, 28, 0xFF);
-  videoOut.drawRect(78, 122, 48, 28, 0xFF);
-  videoOut.drawRect(78, 154, 48, 28, 0xFF);
-  videoOut.drawRect(78, 186, 48, 28, 0xFF);
+ 
+  videoOut.fillRect(120, 20, 48, 28,   0xFF);
+  videoOut.fillRect(120, 52, 48, 28,   0xFF);
+  videoOut.fillRect(120, 84, 48, 28,   0xFF);
+  videoOut.fillRect(120, 116, 48, 28,   0xFF);
+  videoOut.fillRect(120, 148, 48, 28,   0xFF);
+  videoOut.fillRect(120, 180, 48, 28,   0xFF);
   
   //Right column
-  videoOut.drawRect(132, 26, 48, 28, 0xFF);
-  videoOut.drawRect(132, 58, 48, 28, 0xFF);
-  videoOut.drawRect(132, 90, 48, 28, 0xFF);
-  videoOut.drawRect(132, 122, 48, 28, 0xFF);
-  videoOut.drawRect(132, 154, 48, 28, 0xFF);
-  videoOut.drawRect(132, 186, 48, 28, 0xFF);
-  videoOut.drawRect(132, 186, 48, 28, 0xFF);
+  videoOut.fillRect(172, 20, 48, 28,   0xFF);
+  videoOut.fillRect(172, 52, 48, 28,   0xFF);
+  videoOut.fillRect(172, 84, 48, 28,   0xFF);
+  videoOut.fillRect(172, 116, 48, 28,   0xFF);
+  videoOut.fillRect(172, 148, 48, 28,   0xFF);
+  videoOut.fillRect(172, 180, 48, 28,   0xFF);
+  
   char key = keypad.getKey(); 
   if (key != NO_KEY){
   
