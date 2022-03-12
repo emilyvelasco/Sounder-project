@@ -1,4 +1,5 @@
 #include <ESP_8_BIT_GFX.h>
+#include "fishpics.h"
 float incrementer;
 float fishWiggle;
 float wiggleAmount;
@@ -18,7 +19,7 @@ class circle_fish
    
     void draw(ESP_8_BIT_GFX gfx)
     {
-      gfx.drawCircle(x, y, 10, color);
+      gfx.drawBitmap(x, y, epd_bitmap_shark, 71, 26, color);
      if(x<255){ 
       x += deltaX;
       y+=(sin(incrementer)/wiggleAmount);
