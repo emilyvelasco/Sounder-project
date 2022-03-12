@@ -23,6 +23,7 @@ circle_fish3 roundfish(100,120,.3,0xE8, 0.03, 2);
 void setup() {
   // Initial setup of graphics library
   videoOut.begin();
+  //comment out the setRotation line to have the aquarium appear horizontally on a TV
   videoOut.setRotation(3);
 }
 
