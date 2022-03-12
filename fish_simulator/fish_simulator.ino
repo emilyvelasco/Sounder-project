@@ -23,8 +23,7 @@ circle_fish3 roundfish(100,120,.3,0xE8, 0.03, 2);
 void setup() {
   // Initial setup of graphics library
   videoOut.begin();
-  //comment out the setRotation line to have the aquarium appear horizontally on a TV
-  videoOut.setRotation(3);
+
 }
 
 void loop() {
@@ -46,8 +45,8 @@ void loop() {
   roundfish.draw(videoOut);
 
 
-  videoOut.drawBitmap(10, 15,  epd_bitmap_leftseaweed, 31, 221, 0xE8);
-  videoOut.drawBitmap(210, 13,  epd_bitmap_leftseaweed, 32, 221, 0xE8);
+  videoOut.drawBitmap(10, 15,  epd_bitmap_left_seaweed, 31, 221, 0xE8);
+  videoOut.drawBitmap(200, 13,  epd_bitmap_right_seaweed, 32, 221, 0xE8);
 
 
 }
