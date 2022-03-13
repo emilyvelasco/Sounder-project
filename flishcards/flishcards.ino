@@ -36,7 +36,7 @@ SOFTWARE.
 */
 
 #include <ESP_8_BIT_GFX.h>
-#include "fishlayers.h"
+#include "grouperlayers.h"
 #include "pufferlayers.h"
 #include "anglerlayers.h"
 #include "molalayers.h"
