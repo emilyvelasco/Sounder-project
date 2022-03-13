@@ -58,6 +58,11 @@ void setup() {
 void drawGrouper(){
   videoOut.waitForFrame();
   videoOut.fillScreen(0);
+  
+  /*Adafruit GFX only supports drawing monochrome bitmaps
+  Each fish being displayes here is composed of three bitmaps,
+  each representing on level of gray. The bitmaps are layered
+  on top of each other to create a four-level image*/
   videoOut.drawBitmap(0, 0, epd_bitmap_grouper_gray1, 255, 239, 0x88);
   videoOut.drawBitmap(0, 0, epd_bitmap_grouper_gray2, 255, 239, 0xEC);
   videoOut.drawBitmap(0, 0, epd_bitmap_grouper_gray3, 255, 239, 0xF5);
@@ -115,6 +120,7 @@ void drawMola(){
 
 
 void loop() {
+  //cycle through the fish flash cards
     drawGrouper();  
     delay(2000);
     drawPuffer();
