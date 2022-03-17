@@ -16,12 +16,12 @@ void setup() {
 void loop() {
 
   printedLine = textBlock[row];
-    if (column< 14){
+    if (column< 14 && row <5){
        Serial.print(printedLine[column]);
        column++;
        delay(100);
     }
-    else if(column >=14){
+    else if(column ==14 && row <5){
       Serial.println();
       row++;
       column=0;
